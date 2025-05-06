@@ -105,7 +105,7 @@ class CryostatBuilder(gegede.builder.Builder):
         '''Construct the cryostat and place components'''
 
         # Create the main cryostat shape
-        cryo_shape = geom.shapes.Box(self.name + '_shape',
+        cryo_shape = geom.shapes.Box('Cryostat',
                                 dx=self.cryo['Cryostat_x']/2.0,
                                 dy=self.cryo['Cryostat_y']/2.0,
                                 dz=self.cryo['Cryostat_z']/2.0)
