@@ -469,21 +469,21 @@ class XARAPUCABuilder(gegede.builder.Builder):
         wall_vol = geom.structure.Volume("volXARAPUCAWall",
                                     material="G10",
                                     shape=wall_shape)
-
-        window_vol = geom.structure.Volume("volXARAPUCAWindow",
+        # Strict larsoft rules on sensitive volume naming volOpDetSensitive*
+        window_vol = geom.structure.Volume("volOpDetSensitive_XARAPUCAWindow",
                                         material="LAr",
                                         shape=window_shape)
-        window_vol.params.append(("SensDet","PhotonDetector"))
+        #window_vol.params.append(("SensDet","PhotonDetector"))
 
         # Double ARAPUCA
         double_wall_vol = geom.structure.Volume("volXARAPUCADoubleWall",
                                             material="G10",
                                             shape=double_wall_shape)
-
-        double_window_vol = geom.structure.Volume("volXARAPUCADoubleWindow",
+        # Strict larsoft rules on sensitive volume naming volOpDetSensitive*
+        double_window_vol = geom.structure.Volume("volOpDetSensitive_XARAPUCADoubleWindow",
                                                 material="LAr",
                                                 shape=double_window_shape)
-        double_window_vol.params.append(("SensDet","PhotonDetector"))
+        #double_window_vol.params.append(("SensDet","PhotonDetector"))
 
 
 

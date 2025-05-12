@@ -176,10 +176,10 @@ class PMTBuilder(gegede.builder.Builder):
             dtheta=Q('50deg'))
 
         # Create volumes
-        coat_vol = geom.structure.Volume("pmtCoatVol",
+        coat_vol = geom.structure.Volume("volOpDetSensitive_pmtCoatVol",
             material="LAr",
             shape=coating)
-        coat_vol.params.append(("SensDet","PhotonDetector"))
+        #coat_vol.params.append(("SensDet","PhotonDetector"))
 
         pmt_main_vol = geom.structure.Volume("allpmt",
             material="Glass",
@@ -205,10 +205,10 @@ class PMTBuilder(gegede.builder.Builder):
         pmt_coated_vol.placements.append(coat_place.name)
 
         # Create PEN foil PMT volume
-        pen_vol = geom.structure.Volume("pmtFoilVol",
+        pen_vol = geom.structure.Volume("volOpDetSensitive_pmtFoilVol",
             material="LAr",
             shape=pen_plate)
-        pen_vol.params.append(("SensDet","PhotonDetector"))
+        #pen_vol.params.append(("SensDet","PhotonDetector"))
 
         pmt_foil_vol = geom.structure.Volume("volPMT_foil",
             material="LAr",
