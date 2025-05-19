@@ -246,7 +246,7 @@ class CathodeBuilder(gegede.builder.Builder):
         double_arapuca_mesh = None
         if xarapuca_builder:
             double_arapuca_wall = xarapuca_builder.get_volume('volXARAPUCADoubleWall')
-            double_arapuca_window = xarapuca_builder.get_volume('volXARAPUCADoubleWindow')
+            double_arapuca_window = xarapuca_builder.get_volume('volOpDetSensitive_XARAPUCADoubleWindow')
             double_arapuca_mesh = xarapuca_builder.get_volume('volCathodeArapucaMesh')
 
         # Place cathodes and meshes in 2x2 grid
@@ -355,21 +355,33 @@ class CathodeBuilder(gegede.builder.Builder):
                             break
 
                     if (flag_construct):
-                        mesh_pos = geom.structure.Position(
-                            f"{self.name}_mesh_pos_{i}_{j}_{void_idx}",
-                            x=cathode_x,
-                            y=base_y + i*self.params['widthCathode'] + void_y - \
-                            self.params['mesh_width']/2 + self.params['CathodeMeshInnerStructureSeparation'],
-                            z=base_z + j*self.params['lengthCathode'] + void_z
-                        )
-
-                        mesh_place = geom.structure.Placement(
-                            f"{self.name}_mesh_place_{i}_{j}_{void_idx}",
+                        resistive_mesh_top_place = geom.structure.Placement(
+                            f"{self.name}_resistive_mesh_top_place_{i}_{j}_{void_idx}",
                             volume=mesh_vol,
-                            pos=mesh_pos
+                            pos=geom.structure.Position(
+                                f"{self.name}_resistive_mesh_top_pos_{i}_{j}_{void_idx}",
+                                x=cathode_x + self.params['heightCathode']/2 - 2*self.params['CathodeMeshInnerStructureThickness'],
+                                y=base_y + i*self.params['widthCathode'] + void_y - \
+                                self.params['mesh_width']/2 + self.params['CathodeMeshInnerStructureSeparation'],
+                                z=base_z + j*self.params['lengthCathode'] + void_z
+                            )
                         )
 
-                        volume.placements.append(mesh_place.name)
+                        volume.placements.append(resistive_mesh_top_place.name)
+
+                        resistive_mesh_bottom_place = geom.structure.Placement(
+                            f"{self.name}_resistive_mesh_bottom_place_{i}_{j}_{void_idx}",
+                            volume=mesh_vol,
+                            pos=geom.structure.Position(
+                                f"{self.name}_resistive_mesh_bottom_pos_{i}_{j}_{void_idx}",
+                                x=cathode_x - self.params['heightCathode']/2 + 2*self.params['CathodeMeshInnerStructureThickness'],
+                                y=base_y + i*self.params['widthCathode'] + void_y - \
+                                self.params['mesh_width']/2 + self.params['CathodeMeshInnerStructureSeparation'],
+                                z=base_z + j*self.params['lengthCathode'] + void_z
+                            )
+                        )
+
+                        volume.placements.append(resistive_mesh_bottom_place.name)
                     else:
                         # Only place X-ARAPUCA mesh if switch is enabled
                         # print(self.arapucamesh_switch)

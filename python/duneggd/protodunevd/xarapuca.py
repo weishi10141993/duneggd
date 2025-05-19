@@ -599,7 +599,7 @@ class XARAPUCABuilder(gegede.builder.Builder):
         lat_z = 0
 
         wall_vol = self.get_volume('volXARAPUCAWall')
-        window_vol = self.get_volume('volXARAPUCAWindow')
+        window_vol = self.get_volume('volOpDetSensitive_XARAPUCAWindow')
         mesh_vol = self.get_volume('volArapucaMesh')
 
         for pos in positions:

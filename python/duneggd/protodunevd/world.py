@@ -386,6 +386,12 @@ class WorldBuilder(gegede.builder.Builder):
                                           elements=(("Carbon", 8),
                                                   ("Hydrogen", 8)))
 
+        # Define vm2000
+        vm2000 = geom.matter.Molecule("vm2000",
+                                          density="1.2g/cc",
+                                          elements=(("Carbon", 2),
+                                                  ("Hydrogen", 4)))
+
         # Define Nitrogen gas at 1atm, 80K
         nigas = geom.matter.Mixture("NiGas1atm80K",
                                    density="0.0039g/cc",
